@@ -1,0 +1,13 @@
+FROM alpine:3.5
+
+ADD config/development.sphinx.conf /etc/sphinx/sphinx.conf
+
+RUN apk --update add sphinx \
+	&& mkdir -p /var/lib/sphinx \
+	&& mkdir -p /var/lib/sphinx/data \
+	&& mkdir -p /var/log/sphinx \
+	&& mkdir -p /var/run/sphinx
+
+EXPOSE 9306
+
+CMD searchd --nodetach

@@ -1,0 +1,27 @@
+version: "3"
+services:
+  postgres:
+    image: 'postgres:9.6'
+    container_name: postgres
+    volumes:
+      - ./tmp/pgdata:/var/lib/postgresql/data
+  rails:
+    container_name: rails
+    build: .
+    links:
+      - postgres
+      - sphinx
+    volumes:
+      - .:/app
+    ports:
+      - "4000:4000"
+    depends_on:
+      - postgres
+      - sphinx
+  sphinx:
+    build:
+      context: .
+      dockerfile: Dockerfile-sphinx
+    container_name: sphinx 
+    links:
+      - postgres
