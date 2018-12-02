@@ -1,5 +1,5 @@
 class AnswerSerializer < ActiveModel::Serializer
-  attributes :id, :body, :posted_at, :author, :score, :access, :comments, :attachments, :best
+  attributes :id, :body, :created_at, :author, :score, :access, :comments, :attachments, :best
 
   delegate :request, to: :scope
   delegate :current_ability, to: :scope
@@ -16,7 +16,7 @@ class AnswerSerializer < ActiveModel::Serializer
     }
   end
 
-  def posted_at
+  def created_at
     object.created_at.strftime("%d.%m.%y %H:%M:%S")
   end
 

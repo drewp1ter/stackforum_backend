@@ -2,11 +2,11 @@ module Commented
   extend ActiveSupport::Concern
 
   included do
-    before_action :set_commentable, only: :new_comment
+    before_action :set_commentable, only: :comment
     #after_action :stream_comment, only: [:update, :destroy, :new_comment]
   end
 
-  def new_comment
+  def comment
     @comment = @commentable.comments.new(comment_params)
     if @comment.save
       render json: {

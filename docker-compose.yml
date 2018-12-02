@@ -17,11 +17,12 @@ services:
       - "4000:4000"
     depends_on:
       - postgres
-      - sphinx
   sphinx:
+    container_name: sphinx 
     build:
       context: .
       dockerfile: Dockerfile-sphinx
-    container_name: sphinx 
     links:
       - postgres
+    depends_on:
+      - postgres 

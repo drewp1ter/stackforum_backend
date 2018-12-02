@@ -2,12 +2,12 @@ Rails.application.routes.draw do
 
   concern :votable do
     member do
-      post :change_vote
+      patch :vote
     end
   end
 
   concern :commentable do
-    post :new_comment, on: :member
+    post :comment, on: :member
     resources :comments, only: [:update, :destroy]
   end
 
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
       resources :questions, concerns: [:votable, :commentable], except: [:new, :edit], shallow: true do
         resources :answers, concerns: [:votable, :commentable], only: [:create, :update, :destroy] do
-          post :best, on: :member
+          patch :best, on: :member
         end
       end
 

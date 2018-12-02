@@ -1,6 +1,4 @@
 # Be sure to restart your server when you modify this file.
 
 # Configure sensitive parameters which will be filtered from the log file.
-Rails.application.config.filter_parameters += [:password]
-Rails.application.config.filter_parameters += [:attachments_attributes]
-Rails.application.config.filter_parameters += [:image]
+Rails.application.config.filter_parameters += [:password, :attachments_attributes, :file, :image]

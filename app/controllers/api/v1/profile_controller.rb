@@ -19,9 +19,11 @@ class Api::V1::ProfileController < Api::V1::ApplicationController
 
   def avatar_params
     {
-      image: params[:avatar][:image].first[:file], #ахтунг код дабы не плодить похожие методы на фронте
+      #image: params[:avatar][:image].first[:file], #ахтунг код дабы не плодить похожие методы на фронте
+      image: params[:file],
       user_id: current_user.id
     }
+    #params.require(:avatar).permit(:file).merge(current_user)
   end
 
 end

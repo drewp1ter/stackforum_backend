@@ -1,13 +1,18 @@
 FROM alpine:3.5
 
-ADD config/development.sphinx.conf /etc/sphinx/sphinx.conf
+COPY config/development.sphinx.conf /etc/sphinx/sphinx.conf
+
+WORKDIR /app
 
 RUN apk --update add sphinx \
 	&& mkdir -p /var/lib/sphinx \
 	&& mkdir -p /var/lib/sphinx/data \
 	&& mkdir -p /var/log/sphinx \
-	&& mkdir -p /var/run/sphinx
+	&& mkdir -p /var/run/sphinx \
+  && mkdir log \
+  && mkdir -p db/sphinx/development \
+	&& mkdir -p tmp/binlog/development
 
 EXPOSE 9306
 
-CMD searchd --nodetach
+ENTRYPOINT ["searchd", "--nodetach"]

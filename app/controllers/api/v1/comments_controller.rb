@@ -19,9 +19,7 @@ class Api::V1::CommentsController < Api::V1::ApplicationController
 
   def destroy
     res = {
-      comment: {
-        id: @comment.id
-      },
+      id: @comment.id,
       commentable_type: @comment.commentable_type,
       commentable_id: @comment.commentable_id
     }

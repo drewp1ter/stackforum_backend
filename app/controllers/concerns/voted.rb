@@ -2,14 +2,14 @@ module Voted
   extend ActiveSupport::Concern
 
   included do
-    before_action :set_post, only: :change_vote
+    before_action :set_post, only: :vote
   end
 
-  def change_vote
-    case vote_params[:action]
-    when 'UP_VOTE'
+  def vote
+    case params[:vote]
+    when 'UP'
       render json: responce(1)
-    when 'DOWN_VOTE'
+    when 'DOWN'
       render json: responce(-1)
     end
   end
@@ -26,10 +26,6 @@ module Voted
 
   def set_post
     @post = controller_name.classify.constantize.find(params[:id])
-  end
-
-  def vote_params
-    params.require(:vote).permit(:action)
   end
 
 end

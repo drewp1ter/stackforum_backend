@@ -20,7 +20,7 @@ class Ability
 
   def user_abilities
     guest_abilities
-    can [:create, :new_comment, :change_vote], [Question, Answer, Comment, Vote]
+    can [:create, :comment, :vote, :best], [Question, Answer, Comment, Vote]
     can [:update, :destroy, :access],
         [Question, Answer, Comment, Attachment], user: user
   end

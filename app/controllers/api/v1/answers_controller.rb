@@ -36,6 +36,8 @@ class Api::V1::AnswersController < Api::V1::ApplicationController
     if @answer.question.user == current_user
       @answer.set_best
       render json: { id: @answer.id }
+    else
+      render body: nil, status: 403 
     end
   end
 
