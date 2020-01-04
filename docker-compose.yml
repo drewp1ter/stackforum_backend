@@ -6,7 +6,7 @@ services:
     volumes:
       - ./tmp/pgdata:/var/lib/postgresql/data
   rails:
-    container_name: rails
+    container_name: stackforum_rails
     build: .
     links:
       - postgres
@@ -18,11 +18,11 @@ services:
     depends_on:
       - postgres
   sphinx:
-    container_name: sphinx 
+    container_name: stackforum_sphinx
     build:
       context: .
-      dockerfile: Dockerfile-sphinx
+      dockerfile: Dockerfile_sphinx
     links:
       - postgres
     depends_on:
-      - postgres 
+      - postgres
