@@ -21,17 +21,17 @@ class Api::V1::QuestionsController < Api::V1::ApplicationController
   def create
     @question = current_user.questions.new(question_params)
     if @question.save
-      render json: { redirect_to: @question.id }
+      render json: { question_id: @question.id }
     else
-      render json: 'validation error', status: 422
+      render json: 'validation error', status: 400
     end
   end
 
   def update
     if @question.update(question_params)
-      render json: { redirect_to: @question.id }
+      render json: { question_id: @question.id }
     else
-      render json: 'validation error', status: 422
+      render json: 'validation error', status: 400
     end
   end
 
@@ -64,7 +64,7 @@ class Api::V1::QuestionsController < Api::V1::ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :body, attachments_attributes: [:file])
+    params.permit(:title, :body, attachments_attributes: [:file])
   end
 
 end

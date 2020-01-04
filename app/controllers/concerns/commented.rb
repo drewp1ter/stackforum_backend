@@ -15,7 +15,7 @@ module Commented
         commentable_id: @comment.commentable_id
       }
     else
-      render json: { msg: @comment.errors.values }, status: 422  
+      render json: { msg: @comment.errors.values }, status: 422
     end
   end
 
@@ -26,7 +26,7 @@ module Commented
   end
 
   def comment_params
-    params.require(:comment).permit(:body).merge(user: current_user)
+    params.permit(:body).merge(user: current_user)
   end
 
   def stream_comment

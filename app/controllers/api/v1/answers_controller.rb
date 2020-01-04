@@ -13,7 +13,7 @@ class Api::V1::AnswersController < Api::V1::ApplicationController
     if @answer.save
       render json: @answer, serializer: AnswerSerializer
     else
-      render json: { msg: @answer.errors.values }, status: 422
+      render json: { msg: @answer.errors.values }, status: 400
     end
   end
 
@@ -21,7 +21,7 @@ class Api::V1::AnswersController < Api::V1::ApplicationController
     if @answer.update(answer_params)
       render json: @answer, serializer: AnswerSerializer
     else
-      render json: { msg: @answer.errors.values }, status: 422
+      render json: { msg: @answer.errors.values }, status: 400
     end
   end
 
@@ -37,7 +37,7 @@ class Api::V1::AnswersController < Api::V1::ApplicationController
       @answer.set_best
       render json: { id: @answer.id }
     else
-      render body: nil, status: 403 
+      render body: nil, status: 403
     end
   end
 
@@ -58,7 +58,7 @@ class Api::V1::AnswersController < Api::V1::ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit(:body, attachments_attributes: [:file])
+    params.permit(:body, attachments_attributes: [:file])
         .merge(user: current_user)
   end
 
